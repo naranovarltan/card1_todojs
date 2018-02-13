@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3">
+                <div class="page-header ">
+                    <h1>Todo List</h1>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="newTask" placeholder="Введите задачу" required>
+                            </div>
+                            <button type="button" id="addTask" class="btn btn-success col-sm-2">Add task</button>
+                        </div>
+                    </form>
+                    <ul id="taskList">
+                    </ul>
+                    <div class="row" id="counterList">
+                    </div>
+                    <div>
+                        <nav aria-label="..." class="text-center">
+                            <nav aria-label="..." class="text-center">
+                                <ul class="pagination" id="pagination">
+                                </ul>
+                            </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/src.js"></script>
+</body>
+</html>

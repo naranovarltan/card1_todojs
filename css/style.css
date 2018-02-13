@@ -1,0 +1,80 @@
+.done {
+    text-decoration: line-through;
+    opacity: .5;
+    flex: 1;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    padding: 20px 0px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header {
+    border-bottom: none;
+}
+
+.textTask {
+    flex: 1;
+    margin-left: 5px;
+}
+
+#taskList {
+    margin-bottom: 20px;
+}
+
+.editTask {
+    margin-left: 5px;
+}
+
+.doneTask {
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.deleteTask {
+    color: #ff0000;
+}
+
+.saveTask {
+    display: none;
+    margin: 0 5px;
+    height: 20px;
+}
+
+.editTask {
+    display: none;
+    flex: 1;
+    height: 22px;
+}
+
+.counter {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.counter:hover {
+    cursor: pointer;
+}
+
+.focusCounter {
+    border: 2px solid #5cb85c;
+}
+
+.counter .glyphicon {
+    font-size: 17px;
+    color: #ff0000;
+}
+
+.counter .glyphicon:hover {
+    font-weight: bold;
+}
