@@ -44,10 +44,11 @@ $(document).ready(function() {
     function events () {
         $("#addTask").on("click", preAddTask);
         $("#completeTask").on("click", setDoneTask);
-        $("#counterList").on("click", "#allCounter", renderAllTodos);
-        $("#counterList").on("click", "#uncheckedCounter", renderActiveTodos);
-        $("#counterList").on("click", "#checkedCounter", renderCompleteTodos);
-        $("#counterList").on("click", ".deleteCheckedTodos", deleteCompleteTodos);
+        $("#counterList")
+            .on("click", "#allCounter", renderAllTodos)
+            .on("click", "#uncheckedCounter", renderActiveTodos)
+            .on("click", "#checkedCounter", renderCompleteTodos)
+            .on("click", ".deleteCheckedTodos", deleteCompleteTodos);
         $("#pagination").on("click", ".pagin", renderTodosPagination);
         $("#taskList")
             .on("click", ".deleteTask", preDeleteTask)
@@ -108,21 +109,21 @@ $(document).ready(function() {
         todos.push(task);
 
         $("#newTask").val("");
-        renderTodos(todos, undefined, 1);
+        renderTodos(todos);
     }
 
     function preDeleteTask(event) {
         const task = $(event.target);
         const index = parseInt(task.parent().attr("data-index"), 10);
         todos.splice(index, 1);
-        renderTodos(todos, undefined, 1);
+        renderTodos(todos);
     }
 
     function preSetDoneTask(event) {
         const task = $(event.target);
         const index = parseInt(task.parent().attr("data-index"), 10);
         setDoneTask(index);
-        renderTodos(todos, undefined, index);
+        renderTodos(todos);
     }
 
     function setDoneTask(index) {
@@ -151,18 +152,18 @@ $(document).ready(function() {
             const index = parseInt(parentTask.attr("data-index"), 10);
             const newTextTask = parentTask.find(".editTask").val();
             todos[index].title = newTextTask;
-            renderTodos(todos, undefined, 1);
+            renderTodos(todos);
         }
     }
 
     function saveKeyTask(event) {
         const eTarget = $(event.target);
         if (eTarget.hasClass("editTask")) {
-            const index = parseInt(parentTask.attr("data-index"), 10);
             const parentTask = $(event.target).parent();
+            const index = parseInt(parentTask.attr("data-index"), 10);
             const newTextTask = parentTask.find(".editTask").val();
             todos[index].title = newTextTask;
-            renderTodos(todos, undefined, 1);
+            renderTodos(todos);
         }
     }
 
@@ -178,15 +179,15 @@ $(document).ready(function() {
         $("#counterList #checkedCounter").addClass("focusCounter");
     }
 
-    function renderTodos(todosRender, type, numberPage) {
+    function renderTodos(todosRender, type) {
         todosRender = todosRender || todos;
-        const todosRenderPages = todosRender.slice((numberPage - 1) * 5, ((numberPage - 1) * 5) + 5 );
+        // const todosRenderPages = todosRender.slice((numberPage - 1) * 5, ((numberPage - 1) * 5) + 5 );
         $("#taskList > li").remove();
-        todosRenderPages.forEach((task, index) => {
+        todosRender.forEach((task, index) => {
             const li = $(`
                 <li data-index=${index}>
-                    <span class="${task.done ? 'glyphicon glyphicon-check' : 'glyphicon glyphicon-unchecked'} doneTask"></span>
-                    <span class="textTask ${task.done ? 'done' : ''}">${task.title}</span>
+                    <span class="${task.done ? "glyphicon glyphicon-check" : "glyphicon glyphicon-unchecked"} doneTask"></span>
+                    <span class="textTask ${task.done ? "done" : ""}">${task.title}</span>
                     <input type="text" class="editTask">
                     <button class="btn btn-info saveTask">save</button>
                     <span class="deleteTask glyphicon glyphicon-trash"></span>
@@ -196,17 +197,15 @@ $(document).ready(function() {
         });
         renderCounterList();
         filterTodos();
-        if (type === 'active') {
+        if (type === "active") {
             return focusActiveCounter();
-        } else if (type === 'completed') {
+        } else if (type === "completed") {
             return focusCompletedCounter();
         }
         focusAllCounter();
-        renderPagination(todosRenderPages);
+        renderPagination(todosRender);
     }
-    
     function renderPagination(todosRender) {
-
         $("#pagination > li").remove();
         const pages = Math.ceil(todosRender.length / 5)
         for(let i = 1; i <= pages; i++) {
@@ -220,27 +219,25 @@ $(document).ready(function() {
             $("#pagination").append(li);
         }
     }
-    
     function renderTodosPagination(event) {
         const page = $(event.target);
         const numberPage = parseInt(page.parent().attr("data-index"), 10);
-        renderTodos(todos, 'active', numberPage);
+        console.log(numberPage);
     }
-    
     function renderAllTodos() {
-        renderTodos(todos, undefined, 1);
+        renderTodos(todos);
         renderPagination(todos);
     }
 
     function renderActiveTodos() {
         const activeTodos = todos.filter(task => !task.done);
-        renderTodos(activeTodos, 'active', 1);
+        renderTodos(activeTodos, "active");
         renderPagination(activeTodos);
     }
 
     function renderCompleteTodos() {
         const completedTodos = todos.filter(task => task.done);
-        renderTodos(completedTodos, 'completed', 1);
+        renderTodos(completedTodos, "completed");
         renderPagination(completedTodos);
     }
 
@@ -251,7 +248,7 @@ $(document).ready(function() {
                 <div class="alert col-sm-4 counter alert-${counter.type}" id="${counter.id}" role="alert">
                     <span>${counter.name}</span>
                     <span class="${counter.id}"></span>
-                    <span class="${counter.id == 'checkedCounter' ? 'deleteCheckedTodos glyphicon glyphicon-trash' : ''}"></span>
+                    <span class="${counter.id == "checkedCounter" ? "deleteCheckedTodos glyphicon glyphicon-trash" : ""}"></span>
                 </div>
             `);
             $("#counterList").append(button);
@@ -271,7 +268,7 @@ $(document).ready(function() {
         completedTodos.reverse().forEach(index => {
             todos.splice(index, 1)
         });
-        renderTodos(todos, undefined, 1);
+        renderTodos(todos);
     }
 
 });
